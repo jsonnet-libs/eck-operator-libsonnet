@@ -33,6 +33,7 @@ permalink: /1.7/beat/v1beta1/beat/
   * [`fn withUid(uid)`](#fn-metadatawithuid)
 * [`obj spec`](#obj-spec)
   * [`fn withConfig(config)`](#fn-specwithconfig)
+  * [`fn withConfigMixin(config)`](#fn-specwithconfigmixin)
   * [`fn withImage(image)`](#fn-specwithimage)
   * [`fn withSecureSettings(secureSettings)`](#fn-specwithsecuresettings)
   * [`fn withSecureSettingsMixin(secureSettings)`](#fn-specwithsecuresettingsmixin)
@@ -43,6 +44,7 @@ permalink: /1.7/beat/v1beta1/beat/
     * [`fn withSecretName(secretName)`](#fn-specconfigrefwithsecretname)
   * [`obj spec.daemonSet`](#obj-specdaemonset)
     * [`fn withPodTemplate(podTemplate)`](#fn-specdaemonsetwithpodtemplate)
+    * [`fn withPodTemplateMixin(podTemplate)`](#fn-specdaemonsetwithpodtemplatemixin)
     * [`obj spec.daemonSet.updateStrategy`](#obj-specdaemonsetupdatestrategy)
       * [`fn withType(type)`](#fn-specdaemonsetupdatestrategywithtype)
       * [`obj spec.daemonSet.updateStrategy.rollingUpdate`](#obj-specdaemonsetupdatestrategyrollingupdate)
@@ -50,6 +52,7 @@ permalink: /1.7/beat/v1beta1/beat/
         * [`fn withMaxUnavailable(maxUnavailable)`](#fn-specdaemonsetupdatestrategyrollingupdatewithmaxunavailable)
   * [`obj spec.deployment`](#obj-specdeployment)
     * [`fn withPodTemplate(podTemplate)`](#fn-specdeploymentwithpodtemplate)
+    * [`fn withPodTemplateMixin(podTemplate)`](#fn-specdeploymentwithpodtemplatemixin)
     * [`fn withReplicas(replicas)`](#fn-specdeploymentwithreplicas)
     * [`obj spec.deployment.strategy`](#obj-specdeploymentstrategy)
       * [`fn withType(type)`](#fn-specdeploymentstrategywithtype)
@@ -269,6 +272,16 @@ withConfig(config)
 
 "Config holds the Beat configuration. At most one of [`Config`, `ConfigRef`] can be specified."
 
+### fn spec.withConfigMixin
+
+```ts
+withConfigMixin(config)
+```
+
+"Config holds the Beat configuration. At most one of [`Config`, `ConfigRef`] can be specified."
+
+**Note:** This function appends passed data to existing values
+
 ### fn spec.withImage
 
 ```ts
@@ -343,6 +356,16 @@ withPodTemplate(podTemplate)
 
 "PodTemplateSpec describes the data a pod should have when created from a template"
 
+### fn spec.daemonSet.withPodTemplateMixin
+
+```ts
+withPodTemplateMixin(podTemplate)
+```
+
+"PodTemplateSpec describes the data a pod should have when created from a template"
+
+**Note:** This function appends passed data to existing values
+
 ## obj spec.daemonSet.updateStrategy
 
 "DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet."
@@ -386,6 +409,16 @@ withPodTemplate(podTemplate)
 ```
 
 "PodTemplateSpec describes the data a pod should have when created from a template"
+
+### fn spec.deployment.withPodTemplateMixin
+
+```ts
+withPodTemplateMixin(podTemplate)
+```
+
+"PodTemplateSpec describes the data a pod should have when created from a template"
+
+**Note:** This function appends passed data to existing values
 
 ### fn spec.deployment.withReplicas
 

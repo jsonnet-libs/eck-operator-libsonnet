@@ -33,9 +33,11 @@ permalink: /1.8/kibana/v1/kibana/
   * [`fn withUid(uid)`](#fn-metadatawithuid)
 * [`obj spec`](#obj-spec)
   * [`fn withConfig(config)`](#fn-specwithconfig)
+  * [`fn withConfigMixin(config)`](#fn-specwithconfigmixin)
   * [`fn withCount(count)`](#fn-specwithcount)
   * [`fn withImage(image)`](#fn-specwithimage)
   * [`fn withPodTemplate(podTemplate)`](#fn-specwithpodtemplate)
+  * [`fn withPodTemplateMixin(podTemplate)`](#fn-specwithpodtemplatemixin)
   * [`fn withSecureSettings(secureSettings)`](#fn-specwithsecuresettings)
   * [`fn withSecureSettingsMixin(secureSettings)`](#fn-specwithsecuresettingsmixin)
   * [`fn withServiceAccountName(serviceAccountName)`](#fn-specwithserviceaccountname)
@@ -308,6 +310,16 @@ withConfig(config)
 
 "Config holds the Kibana configuration. See: https://www.elastic.co/guide/en/kibana/current/settings.html"
 
+### fn spec.withConfigMixin
+
+```ts
+withConfigMixin(config)
+```
+
+"Config holds the Kibana configuration. See: https://www.elastic.co/guide/en/kibana/current/settings.html"
+
+**Note:** This function appends passed data to existing values
+
 ### fn spec.withCount
 
 ```ts
@@ -331,6 +343,16 @@ withPodTemplate(podTemplate)
 ```
 
 "PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Kibana pods"
+
+### fn spec.withPodTemplateMixin
+
+```ts
+withPodTemplateMixin(podTemplate)
+```
+
+"PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Kibana pods"
+
+**Note:** This function appends passed data to existing values
 
 ### fn spec.withSecureSettings
 

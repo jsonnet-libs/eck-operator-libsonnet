@@ -33,9 +33,11 @@ permalink: /1.7/maps/v1alpha1/elasticMapsServer/
   * [`fn withUid(uid)`](#fn-metadatawithuid)
 * [`obj spec`](#obj-spec)
   * [`fn withConfig(config)`](#fn-specwithconfig)
+  * [`fn withConfigMixin(config)`](#fn-specwithconfigmixin)
   * [`fn withCount(count)`](#fn-specwithcount)
   * [`fn withImage(image)`](#fn-specwithimage)
   * [`fn withPodTemplate(podTemplate)`](#fn-specwithpodtemplate)
+  * [`fn withPodTemplateMixin(podTemplate)`](#fn-specwithpodtemplatemixin)
   * [`fn withServiceAccountName(serviceAccountName)`](#fn-specwithserviceaccountname)
   * [`fn withVersion(version)`](#fn-specwithversion)
   * [`obj spec.configRef`](#obj-specconfigref)
@@ -297,6 +299,16 @@ withConfig(config)
 
 "Config holds the ElasticMapsServer configuration. See: https://www.elastic.co/guide/en/kibana/current/maps-connect-to-ems.html#elastic-maps-server-configuration"
 
+### fn spec.withConfigMixin
+
+```ts
+withConfigMixin(config)
+```
+
+"Config holds the ElasticMapsServer configuration. See: https://www.elastic.co/guide/en/kibana/current/maps-connect-to-ems.html#elastic-maps-server-configuration"
+
+**Note:** This function appends passed data to existing values
+
 ### fn spec.withCount
 
 ```ts
@@ -320,6 +332,16 @@ withPodTemplate(podTemplate)
 ```
 
 "PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Elastic Maps Server pods"
+
+### fn spec.withPodTemplateMixin
+
+```ts
+withPodTemplateMixin(podTemplate)
+```
+
+"PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Elastic Maps Server pods"
+
+**Note:** This function appends passed data to existing values
 
 ### fn spec.withServiceAccountName
 
