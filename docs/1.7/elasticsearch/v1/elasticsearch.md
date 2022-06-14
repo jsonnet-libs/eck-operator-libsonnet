@@ -22,8 +22,6 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -47,6 +45,10 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
     * [`fn withFileRealmMixin(fileRealm)`](#fn-specauthwithfilerealmmixin)
     * [`fn withRoles(roles)`](#fn-specauthwithroles)
     * [`fn withRolesMixin(roles)`](#fn-specauthwithrolesmixin)
+    * [`obj spec.auth.fileRealm`](#obj-specauthfilerealm)
+      * [`fn withSecretName(secretName)`](#fn-specauthfilerealmwithsecretname)
+    * [`obj spec.auth.roles`](#obj-specauthroles)
+      * [`fn withSecretName(secretName)`](#fn-specauthroleswithsecretname)
   * [`obj spec.http`](#obj-spechttp)
     * [`obj spec.http.service`](#obj-spechttpservice)
       * [`obj spec.http.service.metadata`](#obj-spechttpservicemetadata)
@@ -85,6 +87,13 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
         * [`fn withTopologyKeys(topologyKeys)`](#fn-spechttpservicespecwithtopologykeys)
         * [`fn withTopologyKeysMixin(topologyKeys)`](#fn-spechttpservicespecwithtopologykeysmixin)
         * [`fn withType(type)`](#fn-spechttpservicespecwithtype)
+        * [`obj spec.http.service.spec.ports`](#obj-spechttpservicespecports)
+          * [`fn withAppProtocol(appProtocol)`](#fn-spechttpservicespecportswithappprotocol)
+          * [`fn withName(name)`](#fn-spechttpservicespecportswithname)
+          * [`fn withNodePort(nodePort)`](#fn-spechttpservicespecportswithnodeport)
+          * [`fn withPort(port)`](#fn-spechttpservicespecportswithport)
+          * [`fn withProtocol(protocol)`](#fn-spechttpservicespecportswithprotocol)
+          * [`fn withTargetPort(targetPort)`](#fn-spechttpservicespecportswithtargetport)
         * [`obj spec.http.service.spec.sessionAffinityConfig`](#obj-spechttpservicespecsessionaffinityconfig)
           * [`obj spec.http.service.spec.sessionAffinityConfig.clientIP`](#obj-spechttpservicespecsessionaffinityconfigclientip)
             * [`fn withTimeoutSeconds(timeoutSeconds)`](#fn-spechttpservicespecsessionaffinityconfigclientipwithtimeoutseconds)
@@ -95,13 +104,70 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
         * [`fn withDisabled(disabled)`](#fn-spechttptlsselfsignedcertificatewithdisabled)
         * [`fn withSubjectAltNames(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnames)
         * [`fn withSubjectAltNamesMixin(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnamesmixin)
+        * [`obj spec.http.tls.selfSignedCertificate.subjectAltNames`](#obj-spechttptlsselfsignedcertificatesubjectaltnames)
+          * [`fn withDns(dns)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithdns)
+          * [`fn withIp(ip)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithip)
   * [`obj spec.monitoring`](#obj-specmonitoring)
     * [`obj spec.monitoring.logs`](#obj-specmonitoringlogs)
       * [`fn withElasticsearchRefs(elasticsearchRefs)`](#fn-specmonitoringlogswithelasticsearchrefs)
       * [`fn withElasticsearchRefsMixin(elasticsearchRefs)`](#fn-specmonitoringlogswithelasticsearchrefsmixin)
+      * [`obj spec.monitoring.logs.elasticsearchRefs`](#obj-specmonitoringlogselasticsearchrefs)
+        * [`fn withName(name)`](#fn-specmonitoringlogselasticsearchrefswithname)
+        * [`fn withNamespace(namespace)`](#fn-specmonitoringlogselasticsearchrefswithnamespace)
+        * [`fn withServiceName(serviceName)`](#fn-specmonitoringlogselasticsearchrefswithservicename)
     * [`obj spec.monitoring.metrics`](#obj-specmonitoringmetrics)
       * [`fn withElasticsearchRefs(elasticsearchRefs)`](#fn-specmonitoringmetricswithelasticsearchrefs)
       * [`fn withElasticsearchRefsMixin(elasticsearchRefs)`](#fn-specmonitoringmetricswithelasticsearchrefsmixin)
+      * [`obj spec.monitoring.metrics.elasticsearchRefs`](#obj-specmonitoringmetricselasticsearchrefs)
+        * [`fn withName(name)`](#fn-specmonitoringmetricselasticsearchrefswithname)
+        * [`fn withNamespace(namespace)`](#fn-specmonitoringmetricselasticsearchrefswithnamespace)
+        * [`fn withServiceName(serviceName)`](#fn-specmonitoringmetricselasticsearchrefswithservicename)
+  * [`obj spec.nodeSets`](#obj-specnodesets)
+    * [`fn withConfig(config)`](#fn-specnodesetswithconfig)
+    * [`fn withConfigMixin(config)`](#fn-specnodesetswithconfigmixin)
+    * [`fn withCount(count)`](#fn-specnodesetswithcount)
+    * [`fn withName(name)`](#fn-specnodesetswithname)
+    * [`fn withPodTemplate(podTemplate)`](#fn-specnodesetswithpodtemplate)
+    * [`fn withPodTemplateMixin(podTemplate)`](#fn-specnodesetswithpodtemplatemixin)
+    * [`fn withVolumeClaimTemplates(volumeClaimTemplates)`](#fn-specnodesetswithvolumeclaimtemplates)
+    * [`fn withVolumeClaimTemplatesMixin(volumeClaimTemplates)`](#fn-specnodesetswithvolumeclaimtemplatesmixin)
+    * [`obj spec.nodeSets.volumeClaimTemplates`](#obj-specnodesetsvolumeclaimtemplates)
+      * [`fn withApiVersion(apiVersion)`](#fn-specnodesetsvolumeclaimtemplateswithapiversion)
+      * [`fn withKind(kind)`](#fn-specnodesetsvolumeclaimtemplateswithkind)
+      * [`obj spec.nodeSets.volumeClaimTemplates.metadata`](#obj-specnodesetsvolumeclaimtemplatesmetadata)
+        * [`fn withAnnotations(annotations)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithannotations)
+        * [`fn withAnnotationsMixin(annotations)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithannotationsmixin)
+        * [`fn withFinalizers(finalizers)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithfinalizers)
+        * [`fn withFinalizersMixin(finalizers)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithfinalizersmixin)
+        * [`fn withLabels(labels)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithlabels)
+        * [`fn withLabelsMixin(labels)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithlabelsmixin)
+        * [`fn withName(name)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithname)
+        * [`fn withNamespace(namespace)`](#fn-specnodesetsvolumeclaimtemplatesmetadatawithnamespace)
+      * [`obj spec.nodeSets.volumeClaimTemplates.spec`](#obj-specnodesetsvolumeclaimtemplatesspec)
+        * [`fn withAccessModes(accessModes)`](#fn-specnodesetsvolumeclaimtemplatesspecwithaccessmodes)
+        * [`fn withAccessModesMixin(accessModes)`](#fn-specnodesetsvolumeclaimtemplatesspecwithaccessmodesmixin)
+        * [`fn withStorageClassName(storageClassName)`](#fn-specnodesetsvolumeclaimtemplatesspecwithstorageclassname)
+        * [`fn withVolumeMode(volumeMode)`](#fn-specnodesetsvolumeclaimtemplatesspecwithvolumemode)
+        * [`fn withVolumeName(volumeName)`](#fn-specnodesetsvolumeclaimtemplatesspecwithvolumename)
+        * [`obj spec.nodeSets.volumeClaimTemplates.spec.dataSource`](#obj-specnodesetsvolumeclaimtemplatesspecdatasource)
+          * [`fn withApiGroup(apiGroup)`](#fn-specnodesetsvolumeclaimtemplatesspecdatasourcewithapigroup)
+          * [`fn withKind(kind)`](#fn-specnodesetsvolumeclaimtemplatesspecdatasourcewithkind)
+          * [`fn withName(name)`](#fn-specnodesetsvolumeclaimtemplatesspecdatasourcewithname)
+        * [`obj spec.nodeSets.volumeClaimTemplates.spec.resources`](#obj-specnodesetsvolumeclaimtemplatesspecresources)
+          * [`fn withLimits(limits)`](#fn-specnodesetsvolumeclaimtemplatesspecresourceswithlimits)
+          * [`fn withLimitsMixin(limits)`](#fn-specnodesetsvolumeclaimtemplatesspecresourceswithlimitsmixin)
+          * [`fn withRequests(requests)`](#fn-specnodesetsvolumeclaimtemplatesspecresourceswithrequests)
+          * [`fn withRequestsMixin(requests)`](#fn-specnodesetsvolumeclaimtemplatesspecresourceswithrequestsmixin)
+        * [`obj spec.nodeSets.volumeClaimTemplates.spec.selector`](#obj-specnodesetsvolumeclaimtemplatesspecselector)
+          * [`fn withMatchExpressions(matchExpressions)`](#fn-specnodesetsvolumeclaimtemplatesspecselectorwithmatchexpressions)
+          * [`fn withMatchExpressionsMixin(matchExpressions)`](#fn-specnodesetsvolumeclaimtemplatesspecselectorwithmatchexpressionsmixin)
+          * [`fn withMatchLabels(matchLabels)`](#fn-specnodesetsvolumeclaimtemplatesspecselectorwithmatchlabels)
+          * [`fn withMatchLabelsMixin(matchLabels)`](#fn-specnodesetsvolumeclaimtemplatesspecselectorwithmatchlabelsmixin)
+          * [`obj spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions`](#obj-specnodesetsvolumeclaimtemplatesspecselectormatchexpressions)
+            * [`fn withKey(key)`](#fn-specnodesetsvolumeclaimtemplatesspecselectormatchexpressionswithkey)
+            * [`fn withOperator(operator)`](#fn-specnodesetsvolumeclaimtemplatesspecselectormatchexpressionswithoperator)
+            * [`fn withValues(values)`](#fn-specnodesetsvolumeclaimtemplatesspecselectormatchexpressionswithvalues)
+            * [`fn withValuesMixin(values)`](#fn-specnodesetsvolumeclaimtemplatesspecselectormatchexpressionswithvaluesmixin)
   * [`obj spec.podDisruptionBudget`](#obj-specpoddisruptionbudget)
     * [`obj spec.podDisruptionBudget.metadata`](#obj-specpoddisruptionbudgetmetadata)
       * [`fn withAnnotations(annotations)`](#fn-specpoddisruptionbudgetmetadatawithannotations)
@@ -120,6 +186,24 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
         * [`fn withMatchExpressionsMixin(matchExpressions)`](#fn-specpoddisruptionbudgetspecselectorwithmatchexpressionsmixin)
         * [`fn withMatchLabels(matchLabels)`](#fn-specpoddisruptionbudgetspecselectorwithmatchlabels)
         * [`fn withMatchLabelsMixin(matchLabels)`](#fn-specpoddisruptionbudgetspecselectorwithmatchlabelsmixin)
+        * [`obj spec.podDisruptionBudget.spec.selector.matchExpressions`](#obj-specpoddisruptionbudgetspecselectormatchexpressions)
+          * [`fn withKey(key)`](#fn-specpoddisruptionbudgetspecselectormatchexpressionswithkey)
+          * [`fn withOperator(operator)`](#fn-specpoddisruptionbudgetspecselectormatchexpressionswithoperator)
+          * [`fn withValues(values)`](#fn-specpoddisruptionbudgetspecselectormatchexpressionswithvalues)
+          * [`fn withValuesMixin(values)`](#fn-specpoddisruptionbudgetspecselectormatchexpressionswithvaluesmixin)
+  * [`obj spec.remoteClusters`](#obj-specremoteclusters)
+    * [`fn withName(name)`](#fn-specremoteclusterswithname)
+    * [`obj spec.remoteClusters.elasticsearchRef`](#obj-specremoteclusterselasticsearchref)
+      * [`fn withName(name)`](#fn-specremoteclusterselasticsearchrefwithname)
+      * [`fn withNamespace(namespace)`](#fn-specremoteclusterselasticsearchrefwithnamespace)
+      * [`fn withServiceName(serviceName)`](#fn-specremoteclusterselasticsearchrefwithservicename)
+  * [`obj spec.secureSettings`](#obj-specsecuresettings)
+    * [`fn withEntries(entries)`](#fn-specsecuresettingswithentries)
+    * [`fn withEntriesMixin(entries)`](#fn-specsecuresettingswithentriesmixin)
+    * [`fn withSecretName(secretName)`](#fn-specsecuresettingswithsecretname)
+    * [`obj spec.secureSettings.entries`](#obj-specsecuresettingsentries)
+      * [`fn withKey(key)`](#fn-specsecuresettingsentrieswithkey)
+      * [`fn withPath(path)`](#fn-specsecuresettingsentrieswithpath)
   * [`obj spec.transport`](#obj-spectransport)
     * [`obj spec.transport.service`](#obj-spectransportservice)
       * [`obj spec.transport.service.metadata`](#obj-spectransportservicemetadata)
@@ -158,6 +242,13 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
         * [`fn withTopologyKeys(topologyKeys)`](#fn-spectransportservicespecwithtopologykeys)
         * [`fn withTopologyKeysMixin(topologyKeys)`](#fn-spectransportservicespecwithtopologykeysmixin)
         * [`fn withType(type)`](#fn-spectransportservicespecwithtype)
+        * [`obj spec.transport.service.spec.ports`](#obj-spectransportservicespecports)
+          * [`fn withAppProtocol(appProtocol)`](#fn-spectransportservicespecportswithappprotocol)
+          * [`fn withName(name)`](#fn-spectransportservicespecportswithname)
+          * [`fn withNodePort(nodePort)`](#fn-spectransportservicespecportswithnodeport)
+          * [`fn withPort(port)`](#fn-spectransportservicespecportswithport)
+          * [`fn withProtocol(protocol)`](#fn-spectransportservicespecportswithprotocol)
+          * [`fn withTargetPort(targetPort)`](#fn-spectransportservicespecportswithtargetport)
         * [`obj spec.transport.service.spec.sessionAffinityConfig`](#obj-spectransportservicespecsessionaffinityconfig)
           * [`obj spec.transport.service.spec.sessionAffinityConfig.clientIP`](#obj-spectransportservicespecsessionaffinityconfigclientip)
             * [`fn withTimeoutSeconds(timeoutSeconds)`](#fn-spectransportservicespecsessionaffinityconfigclientipwithtimeoutseconds)
@@ -166,6 +257,9 @@ permalink: /1.7/elasticsearch/v1/elasticsearch/
       * [`fn withSubjectAltNamesMixin(subjectAltNames)`](#fn-spectransporttlswithsubjectaltnamesmixin)
       * [`obj spec.transport.tls.certificate`](#obj-spectransporttlscertificate)
         * [`fn withSecretName(secretName)`](#fn-spectransporttlscertificatewithsecretname)
+      * [`obj spec.transport.tls.subjectAltNames`](#obj-spectransporttlssubjectaltnames)
+        * [`fn withDns(dns)`](#fn-spectransporttlssubjectaltnameswithdns)
+        * [`fn withIp(ip)`](#fn-spectransporttlssubjectaltnameswithip)
   * [`obj spec.updateStrategy`](#obj-specupdatestrategy)
     * [`obj spec.updateStrategy.changeBudget`](#obj-specupdatestrategychangebudget)
       * [`fn withMaxSurge(maxSurge)`](#fn-specupdatestrategychangebudgetwithmaxsurge)
@@ -284,24 +378,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -492,6 +568,30 @@ withRolesMixin(roles)
 "Roles to propagate to the Elasticsearch cluster."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.auth.fileRealm
+
+"FileRealm to propagate to the Elasticsearch cluster."
+
+### fn spec.auth.fileRealm.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
+
+## obj spec.auth.roles
+
+"Roles to propagate to the Elasticsearch cluster."
+
+### fn spec.auth.roles.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
 
 ## obj spec.http
 
@@ -801,6 +901,58 @@ withType(type)
 
 "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"
 
+## obj spec.http.service.spec.ports
+
+"The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies"
+
+### fn spec.http.service.spec.ports.withAppProtocol
+
+```ts
+withAppProtocol(appProtocol)
+```
+
+"The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default."
+
+### fn spec.http.service.spec.ports.withName
+
+```ts
+withName(name)
+```
+
+"The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service."
+
+### fn spec.http.service.spec.ports.withNodePort
+
+```ts
+withNodePort(nodePort)
+```
+
+"The port on each node on which this service is exposed when type is NodePort or LoadBalancer.  Usually assigned by the system. If a value is specified, in-range, and not in use it will be used, otherwise the operation will fail.  If not specified, a port will be allocated if this Service requires one.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type from NodePort to ClusterIP). More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport"
+
+### fn spec.http.service.spec.ports.withPort
+
+```ts
+withPort(port)
+```
+
+"The port that will be exposed by this service."
+
+### fn spec.http.service.spec.ports.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP."
+
+### fn spec.http.service.spec.ports.withTargetPort
+
+```ts
+withTargetPort(targetPort)
+```
+
+"Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service"
+
 ## obj spec.http.service.spec.sessionAffinityConfig
 
 "sessionAffinityConfig contains the configurations of session affinity."
@@ -863,6 +1015,26 @@ withSubjectAltNamesMixin(subjectAltNames)
 
 **Note:** This function appends passed data to existing values
 
+## obj spec.http.tls.selfSignedCertificate.subjectAltNames
+
+"SubjectAlternativeNames is a list of SANs to include in the generated HTTP TLS certificate."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withDns
+
+```ts
+withDns(dns)
+```
+
+"DNS is the DNS name of the subject."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withIp
+
+```ts
+withIp(ip)
+```
+
+"IP is the IP address of the subject."
+
 ## obj spec.monitoring
 
 "Monitoring enables you to collect and ship log and monitoring data of this Elasticsearch cluster. See https://www.elastic.co/guide/en/elasticsearch/reference/current/monitor-elasticsearch-cluster.html. Metricbeat and Filebeat are deployed in the same Pod as sidecars and each one sends data to one or two different Elasticsearch monitoring clusters running in the same Kubernetes cluster."
@@ -889,6 +1061,34 @@ withElasticsearchRefsMixin(elasticsearchRefs)
 
 **Note:** This function appends passed data to existing values
 
+## obj spec.monitoring.logs.elasticsearchRefs
+
+"ElasticsearchRefs is a reference to a list of monitoring Elasticsearch clusters running in the same Kubernetes cluster. Due to existing limitations, only a single Elasticsearch cluster is currently supported."
+
+### fn spec.monitoring.logs.elasticsearchRefs.withName
+
+```ts
+withName(name)
+```
+
+"Name of the Kubernetes object."
+
+### fn spec.monitoring.logs.elasticsearchRefs.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace of the Kubernetes object. If empty, defaults to the current namespace."
+
+### fn spec.monitoring.logs.elasticsearchRefs.withServiceName
+
+```ts
+withServiceName(serviceName)
+```
+
+"ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
+
 ## obj spec.monitoring.metrics
 
 "Metrics holds references to Elasticsearch clusters which receive monitoring data from this Elasticsearch cluster."
@@ -908,6 +1108,394 @@ withElasticsearchRefsMixin(elasticsearchRefs)
 ```
 
 "ElasticsearchRefs is a reference to a list of monitoring Elasticsearch clusters running in the same Kubernetes cluster. Due to existing limitations, only a single Elasticsearch cluster is currently supported."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.monitoring.metrics.elasticsearchRefs
+
+"ElasticsearchRefs is a reference to a list of monitoring Elasticsearch clusters running in the same Kubernetes cluster. Due to existing limitations, only a single Elasticsearch cluster is currently supported."
+
+### fn spec.monitoring.metrics.elasticsearchRefs.withName
+
+```ts
+withName(name)
+```
+
+"Name of the Kubernetes object."
+
+### fn spec.monitoring.metrics.elasticsearchRefs.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace of the Kubernetes object. If empty, defaults to the current namespace."
+
+### fn spec.monitoring.metrics.elasticsearchRefs.withServiceName
+
+```ts
+withServiceName(serviceName)
+```
+
+"ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
+
+## obj spec.nodeSets
+
+"NodeSets allow specifying groups of Elasticsearch nodes sharing the same configuration and Pod templates."
+
+### fn spec.nodeSets.withConfig
+
+```ts
+withConfig(config)
+```
+
+"Config holds the Elasticsearch configuration."
+
+### fn spec.nodeSets.withConfigMixin
+
+```ts
+withConfigMixin(config)
+```
+
+"Config holds the Elasticsearch configuration."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.withCount
+
+```ts
+withCount(count)
+```
+
+"Count of Elasticsearch nodes to deploy. If the node set is managed by an autoscaling policy the initial value is automatically set by the autoscaling controller."
+
+### fn spec.nodeSets.withName
+
+```ts
+withName(name)
+```
+
+"Name of this set of nodes. Becomes a part of the Elasticsearch node.name setting."
+
+### fn spec.nodeSets.withPodTemplate
+
+```ts
+withPodTemplate(podTemplate)
+```
+
+"PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Pods belonging to this NodeSet."
+
+### fn spec.nodeSets.withPodTemplateMixin
+
+```ts
+withPodTemplateMixin(podTemplate)
+```
+
+"PodTemplate provides customisation options (labels, annotations, affinity rules, resource requests, and so on) for the Pods belonging to this NodeSet."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.withVolumeClaimTemplates
+
+```ts
+withVolumeClaimTemplates(volumeClaimTemplates)
+```
+
+"VolumeClaimTemplates is a list of persistent volume claims to be used by each Pod in this NodeSet. Every claim in this list must have a matching volumeMount in one of the containers defined in the PodTemplate. Items defined here take precedence over any default claims added by the operator with the same name."
+
+### fn spec.nodeSets.withVolumeClaimTemplatesMixin
+
+```ts
+withVolumeClaimTemplatesMixin(volumeClaimTemplates)
+```
+
+"VolumeClaimTemplates is a list of persistent volume claims to be used by each Pod in this NodeSet. Every claim in this list must have a matching volumeMount in one of the containers defined in the PodTemplate. Items defined here take precedence over any default claims added by the operator with the same name."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.nodeSets.volumeClaimTemplates
+
+"VolumeClaimTemplates is a list of persistent volume claims to be used by each Pod in this NodeSet. Every claim in this list must have a matching volumeMount in one of the containers defined in the PodTemplate. Items defined here take precedence over any default claims added by the operator with the same name."
+
+### fn spec.nodeSets.volumeClaimTemplates.withApiVersion
+
+```ts
+withApiVersion(apiVersion)
+```
+
+"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
+
+### fn spec.nodeSets.volumeClaimTemplates.withKind
+
+```ts
+withKind(kind)
+```
+
+"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
+
+## obj spec.nodeSets.volumeClaimTemplates.metadata
+
+"Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withAnnotations
+
+```ts
+withAnnotations(annotations)
+```
+
+
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withAnnotationsMixin
+
+```ts
+withAnnotationsMixin(annotations)
+```
+
+
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withFinalizers
+
+```ts
+withFinalizers(finalizers)
+```
+
+
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withFinalizersMixin
+
+```ts
+withFinalizersMixin(finalizers)
+```
+
+
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withLabels
+
+```ts
+withLabels(labels)
+```
+
+
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withLabelsMixin
+
+```ts
+withLabelsMixin(labels)
+```
+
+
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withName
+
+```ts
+withName(name)
+```
+
+
+
+### fn spec.nodeSets.volumeClaimTemplates.metadata.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+
+
+## obj spec.nodeSets.volumeClaimTemplates.spec
+
+"Spec defines the desired characteristics of a volume requested by a pod author. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.withAccessModes
+
+```ts
+withAccessModes(accessModes)
+```
+
+"AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.withAccessModesMixin
+
+```ts
+withAccessModesMixin(accessModes)
+```
+
+"AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1"
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.withStorageClassName
+
+```ts
+withStorageClassName(storageClassName)
+```
+
+"Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.withVolumeMode
+
+```ts
+withVolumeMode(volumeMode)
+```
+
+"volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.withVolumeName
+
+```ts
+withVolumeName(volumeName)
+```
+
+"VolumeName is the binding reference to the PersistentVolume backing this claim."
+
+## obj spec.nodeSets.volumeClaimTemplates.spec.dataSource
+
+"This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) * An existing custom resource that implements data population (Alpha) In order to use custom resource types that implement data population, the AnyVolumeDataSource feature gate must be enabled. If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.dataSource.withApiGroup
+
+```ts
+withApiGroup(apiGroup)
+```
+
+"APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.dataSource.withKind
+
+```ts
+withKind(kind)
+```
+
+"Kind is the type of resource being referenced"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.dataSource.withName
+
+```ts
+withName(name)
+```
+
+"Name is the name of resource being referenced"
+
+## obj spec.nodeSets.volumeClaimTemplates.spec.resources
+
+"Resources represents the minimum resources the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.resources.withLimits
+
+```ts
+withLimits(limits)
+```
+
+"Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.resources.withLimitsMixin
+
+```ts
+withLimitsMixin(limits)
+```
+
+"Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.resources.withRequests
+
+```ts
+withRequests(requests)
+```
+
+"Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.resources.withRequestsMixin
+
+```ts
+withRequestsMixin(requests)
+```
+
+"Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.nodeSets.volumeClaimTemplates.spec.selector
+
+"A label query over volumes to consider for binding."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.withMatchExpressions
+
+```ts
+withMatchExpressions(matchExpressions)
+```
+
+"matchExpressions is a list of label selector requirements. The requirements are ANDed."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.withMatchExpressionsMixin
+
+```ts
+withMatchExpressionsMixin(matchExpressions)
+```
+
+"matchExpressions is a list of label selector requirements. The requirements are ANDed."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.withMatchLabels
+
+```ts
+withMatchLabels(matchLabels)
+```
+
+"matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.withMatchLabelsMixin
+
+```ts
+withMatchLabelsMixin(matchLabels)
+```
+
+"matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions
+
+"matchExpressions is a list of label selector requirements. The requirements are ANDed."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions.withKey
+
+```ts
+withKey(key)
+```
+
+"key is the label key that the selector applies to."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions.withOperator
+
+```ts
+withOperator(operator)
+```
+
+"operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions.withValues
+
+```ts
+withValues(values)
+```
+
+"values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
+
+### fn spec.nodeSets.volumeClaimTemplates.spec.selector.matchExpressions.withValuesMixin
+
+```ts
+withValuesMixin(values)
+```
+
+"values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
 
 **Note:** This function appends passed data to existing values
 
@@ -1048,6 +1636,134 @@ withMatchLabelsMixin(matchLabels)
 "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.podDisruptionBudget.spec.selector.matchExpressions
+
+"matchExpressions is a list of label selector requirements. The requirements are ANDed."
+
+### fn spec.podDisruptionBudget.spec.selector.matchExpressions.withKey
+
+```ts
+withKey(key)
+```
+
+"key is the label key that the selector applies to."
+
+### fn spec.podDisruptionBudget.spec.selector.matchExpressions.withOperator
+
+```ts
+withOperator(operator)
+```
+
+"operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+
+### fn spec.podDisruptionBudget.spec.selector.matchExpressions.withValues
+
+```ts
+withValues(values)
+```
+
+"values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
+
+### fn spec.podDisruptionBudget.spec.selector.matchExpressions.withValuesMixin
+
+```ts
+withValuesMixin(values)
+```
+
+"values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.remoteClusters
+
+"RemoteClusters enables you to establish uni-directional connections to a remote Elasticsearch cluster."
+
+### fn spec.remoteClusters.withName
+
+```ts
+withName(name)
+```
+
+"Name is the name of the remote cluster as it is set in the Elasticsearch settings. The name is expected to be unique for each remote clusters."
+
+## obj spec.remoteClusters.elasticsearchRef
+
+"ElasticsearchRef is a reference to an Elasticsearch cluster running within the same k8s cluster."
+
+### fn spec.remoteClusters.elasticsearchRef.withName
+
+```ts
+withName(name)
+```
+
+"Name of the Kubernetes object."
+
+### fn spec.remoteClusters.elasticsearchRef.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace of the Kubernetes object. If empty, defaults to the current namespace."
+
+### fn spec.remoteClusters.elasticsearchRef.withServiceName
+
+```ts
+withServiceName(serviceName)
+```
+
+"ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
+
+## obj spec.secureSettings
+
+"SecureSettings is a list of references to Kubernetes secrets containing sensitive configuration options for Elasticsearch."
+
+### fn spec.secureSettings.withEntries
+
+```ts
+withEntries(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.withEntriesMixin
+
+```ts
+withEntriesMixin(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.secureSettings.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
+
+## obj spec.secureSettings.entries
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.entries.withKey
+
+```ts
+withKey(key)
+```
+
+"Key is the key contained in the secret."
+
+### fn spec.secureSettings.entries.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the relative file path to map the key to. Path must not be an absolute file path and must not contain any \"..\" components."
 
 ## obj spec.transport
 
@@ -1357,6 +2073,58 @@ withType(type)
 
 "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"
 
+## obj spec.transport.service.spec.ports
+
+"The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies"
+
+### fn spec.transport.service.spec.ports.withAppProtocol
+
+```ts
+withAppProtocol(appProtocol)
+```
+
+"The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default."
+
+### fn spec.transport.service.spec.ports.withName
+
+```ts
+withName(name)
+```
+
+"The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service."
+
+### fn spec.transport.service.spec.ports.withNodePort
+
+```ts
+withNodePort(nodePort)
+```
+
+"The port on each node on which this service is exposed when type is NodePort or LoadBalancer.  Usually assigned by the system. If a value is specified, in-range, and not in use it will be used, otherwise the operation will fail.  If not specified, a port will be allocated if this Service requires one.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type from NodePort to ClusterIP). More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport"
+
+### fn spec.transport.service.spec.ports.withPort
+
+```ts
+withPort(port)
+```
+
+"The port that will be exposed by this service."
+
+### fn spec.transport.service.spec.ports.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP."
+
+### fn spec.transport.service.spec.ports.withTargetPort
+
+```ts
+withTargetPort(targetPort)
+```
+
+"Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service"
+
 ## obj spec.transport.service.spec.sessionAffinityConfig
 
 "sessionAffinityConfig contains the configurations of session affinity."
@@ -1406,6 +2174,26 @@ withSecretName(secretName)
 ```
 
 "SecretName is the name of the secret."
+
+## obj spec.transport.tls.subjectAltNames
+
+"SubjectAlternativeNames is a list of SANs to include in the generated node transport TLS certificates."
+
+### fn spec.transport.tls.subjectAltNames.withDns
+
+```ts
+withDns(dns)
+```
+
+"DNS is the DNS name of the subject."
+
+### fn spec.transport.tls.subjectAltNames.withIp
+
+```ts
+withIp(ip)
+```
+
+"IP is the IP address of the subject."
 
 ## obj spec.updateStrategy
 

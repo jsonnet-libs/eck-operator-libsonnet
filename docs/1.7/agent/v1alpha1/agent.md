@@ -22,8 +22,6 @@ permalink: /1.7/agent/v1alpha1/agent/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -62,6 +60,11 @@ permalink: /1.7/agent/v1alpha1/agent/
       * [`obj spec.deployment.strategy.rollingUpdate`](#obj-specdeploymentstrategyrollingupdate)
         * [`fn withMaxSurge(maxSurge)`](#fn-specdeploymentstrategyrollingupdatewithmaxsurge)
         * [`fn withMaxUnavailable(maxUnavailable)`](#fn-specdeploymentstrategyrollingupdatewithmaxunavailable)
+  * [`obj spec.elasticsearchRefs`](#obj-specelasticsearchrefs)
+    * [`fn withName(name)`](#fn-specelasticsearchrefswithname)
+    * [`fn withNamespace(namespace)`](#fn-specelasticsearchrefswithnamespace)
+    * [`fn withOutputName(outputName)`](#fn-specelasticsearchrefswithoutputname)
+    * [`fn withServiceName(serviceName)`](#fn-specelasticsearchrefswithservicename)
   * [`obj spec.fleetServerRef`](#obj-specfleetserverref)
     * [`fn withName(name)`](#fn-specfleetserverrefwithname)
     * [`fn withNamespace(namespace)`](#fn-specfleetserverrefwithnamespace)
@@ -104,6 +107,13 @@ permalink: /1.7/agent/v1alpha1/agent/
         * [`fn withTopologyKeys(topologyKeys)`](#fn-spechttpservicespecwithtopologykeys)
         * [`fn withTopologyKeysMixin(topologyKeys)`](#fn-spechttpservicespecwithtopologykeysmixin)
         * [`fn withType(type)`](#fn-spechttpservicespecwithtype)
+        * [`obj spec.http.service.spec.ports`](#obj-spechttpservicespecports)
+          * [`fn withAppProtocol(appProtocol)`](#fn-spechttpservicespecportswithappprotocol)
+          * [`fn withName(name)`](#fn-spechttpservicespecportswithname)
+          * [`fn withNodePort(nodePort)`](#fn-spechttpservicespecportswithnodeport)
+          * [`fn withPort(port)`](#fn-spechttpservicespecportswithport)
+          * [`fn withProtocol(protocol)`](#fn-spechttpservicespecportswithprotocol)
+          * [`fn withTargetPort(targetPort)`](#fn-spechttpservicespecportswithtargetport)
         * [`obj spec.http.service.spec.sessionAffinityConfig`](#obj-spechttpservicespecsessionaffinityconfig)
           * [`obj spec.http.service.spec.sessionAffinityConfig.clientIP`](#obj-spechttpservicespecsessionaffinityconfigclientip)
             * [`fn withTimeoutSeconds(timeoutSeconds)`](#fn-spechttpservicespecsessionaffinityconfigclientipwithtimeoutseconds)
@@ -114,10 +124,20 @@ permalink: /1.7/agent/v1alpha1/agent/
         * [`fn withDisabled(disabled)`](#fn-spechttptlsselfsignedcertificatewithdisabled)
         * [`fn withSubjectAltNames(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnames)
         * [`fn withSubjectAltNamesMixin(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnamesmixin)
+        * [`obj spec.http.tls.selfSignedCertificate.subjectAltNames`](#obj-spechttptlsselfsignedcertificatesubjectaltnames)
+          * [`fn withDns(dns)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithdns)
+          * [`fn withIp(ip)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithip)
   * [`obj spec.kibanaRef`](#obj-speckibanaref)
     * [`fn withName(name)`](#fn-speckibanarefwithname)
     * [`fn withNamespace(namespace)`](#fn-speckibanarefwithnamespace)
     * [`fn withServiceName(serviceName)`](#fn-speckibanarefwithservicename)
+  * [`obj spec.secureSettings`](#obj-specsecuresettings)
+    * [`fn withEntries(entries)`](#fn-specsecuresettingswithentries)
+    * [`fn withEntriesMixin(entries)`](#fn-specsecuresettingswithentriesmixin)
+    * [`fn withSecretName(secretName)`](#fn-specsecuresettingswithsecretname)
+    * [`obj spec.secureSettings.entries`](#obj-specsecuresettingsentries)
+      * [`fn withKey(key)`](#fn-specsecuresettingsentrieswithkey)
+      * [`fn withPath(path)`](#fn-specsecuresettingsentrieswithpath)
 
 ## Fields
 
@@ -232,24 +252,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -536,6 +538,42 @@ withMaxUnavailable(maxUnavailable)
 ```
 
 "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods."
+
+## obj spec.elasticsearchRefs
+
+"ElasticsearchRefs is a reference to a list of Elasticsearch clusters running in the same Kubernetes cluster. Due to existing limitations, only a single ES cluster is currently supported."
+
+### fn spec.elasticsearchRefs.withName
+
+```ts
+withName(name)
+```
+
+"Name of the Kubernetes object."
+
+### fn spec.elasticsearchRefs.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace of the Kubernetes object. If empty, defaults to the current namespace."
+
+### fn spec.elasticsearchRefs.withOutputName
+
+```ts
+withOutputName(outputName)
+```
+
+
+
+### fn spec.elasticsearchRefs.withServiceName
+
+```ts
+withServiceName(serviceName)
+```
+
+"ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
 
 ## obj spec.fleetServerRef
 
@@ -873,6 +911,58 @@ withType(type)
 
 "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"
 
+## obj spec.http.service.spec.ports
+
+"The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies"
+
+### fn spec.http.service.spec.ports.withAppProtocol
+
+```ts
+withAppProtocol(appProtocol)
+```
+
+"The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default."
+
+### fn spec.http.service.spec.ports.withName
+
+```ts
+withName(name)
+```
+
+"The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service."
+
+### fn spec.http.service.spec.ports.withNodePort
+
+```ts
+withNodePort(nodePort)
+```
+
+"The port on each node on which this service is exposed when type is NodePort or LoadBalancer.  Usually assigned by the system. If a value is specified, in-range, and not in use it will be used, otherwise the operation will fail.  If not specified, a port will be allocated if this Service requires one.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type from NodePort to ClusterIP). More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport"
+
+### fn spec.http.service.spec.ports.withPort
+
+```ts
+withPort(port)
+```
+
+"The port that will be exposed by this service."
+
+### fn spec.http.service.spec.ports.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP."
+
+### fn spec.http.service.spec.ports.withTargetPort
+
+```ts
+withTargetPort(targetPort)
+```
+
+"Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service"
+
 ## obj spec.http.service.spec.sessionAffinityConfig
 
 "sessionAffinityConfig contains the configurations of session affinity."
@@ -935,6 +1025,26 @@ withSubjectAltNamesMixin(subjectAltNames)
 
 **Note:** This function appends passed data to existing values
 
+## obj spec.http.tls.selfSignedCertificate.subjectAltNames
+
+"SubjectAlternativeNames is a list of SANs to include in the generated HTTP TLS certificate."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withDns
+
+```ts
+withDns(dns)
+```
+
+"DNS is the DNS name of the subject."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withIp
+
+```ts
+withIp(ip)
+```
+
+"IP is the IP address of the subject."
+
 ## obj spec.kibanaRef
 
 "KibanaRef is a reference to Kibana where Fleet should be set up and this Agent should be enrolled. Don't set unless `mode` is set to `fleet`."
@@ -962,3 +1072,53 @@ withServiceName(serviceName)
 ```
 
 "ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
+
+## obj spec.secureSettings
+
+"SecureSettings is a list of references to Kubernetes Secrets containing sensitive configuration options for the Agent. Secrets data can be then referenced in the Agent config using the Secret's keys or as specified in `Entries` field of each SecureSetting."
+
+### fn spec.secureSettings.withEntries
+
+```ts
+withEntries(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.withEntriesMixin
+
+```ts
+withEntriesMixin(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.secureSettings.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
+
+## obj spec.secureSettings.entries
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.entries.withKey
+
+```ts
+withKey(key)
+```
+
+"Key is the key contained in the secret."
+
+### fn spec.secureSettings.entries.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the relative file path to map the key to. Path must not be an absolute file path and must not contain any \"..\" components."

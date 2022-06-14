@@ -22,8 +22,6 @@ permalink: /1.7/kibana/v1beta1/kibana/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -82,6 +80,13 @@ permalink: /1.7/kibana/v1beta1/kibana/
         * [`fn withTopologyKeys(topologyKeys)`](#fn-spechttpservicespecwithtopologykeys)
         * [`fn withTopologyKeysMixin(topologyKeys)`](#fn-spechttpservicespecwithtopologykeysmixin)
         * [`fn withType(type)`](#fn-spechttpservicespecwithtype)
+        * [`obj spec.http.service.spec.ports`](#obj-spechttpservicespecports)
+          * [`fn withAppProtocol(appProtocol)`](#fn-spechttpservicespecportswithappprotocol)
+          * [`fn withName(name)`](#fn-spechttpservicespecportswithname)
+          * [`fn withNodePort(nodePort)`](#fn-spechttpservicespecportswithnodeport)
+          * [`fn withPort(port)`](#fn-spechttpservicespecportswithport)
+          * [`fn withProtocol(protocol)`](#fn-spechttpservicespecportswithprotocol)
+          * [`fn withTargetPort(targetPort)`](#fn-spechttpservicespecportswithtargetport)
         * [`obj spec.http.service.spec.sessionAffinityConfig`](#obj-spechttpservicespecsessionaffinityconfig)
           * [`obj spec.http.service.spec.sessionAffinityConfig.clientIP`](#obj-spechttpservicespecsessionaffinityconfigclientip)
             * [`fn withTimeoutSeconds(timeoutSeconds)`](#fn-spechttpservicespecsessionaffinityconfigclientipwithtimeoutseconds)
@@ -92,6 +97,16 @@ permalink: /1.7/kibana/v1beta1/kibana/
         * [`fn withDisabled(disabled)`](#fn-spechttptlsselfsignedcertificatewithdisabled)
         * [`fn withSubjectAltNames(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnames)
         * [`fn withSubjectAltNamesMixin(subjectAltNames)`](#fn-spechttptlsselfsignedcertificatewithsubjectaltnamesmixin)
+        * [`obj spec.http.tls.selfSignedCertificate.subjectAltNames`](#obj-spechttptlsselfsignedcertificatesubjectaltnames)
+          * [`fn withDns(dns)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithdns)
+          * [`fn withIp(ip)`](#fn-spechttptlsselfsignedcertificatesubjectaltnameswithip)
+  * [`obj spec.secureSettings`](#obj-specsecuresettings)
+    * [`fn withEntries(entries)`](#fn-specsecuresettingswithentries)
+    * [`fn withEntriesMixin(entries)`](#fn-specsecuresettingswithentriesmixin)
+    * [`fn withSecretName(secretName)`](#fn-specsecuresettingswithsecretname)
+    * [`obj spec.secureSettings.entries`](#obj-specsecuresettingsentries)
+      * [`fn withKey(key)`](#fn-specsecuresettingsentrieswithkey)
+      * [`fn withPath(path)`](#fn-specsecuresettingsentrieswithpath)
 
 ## Fields
 
@@ -206,24 +221,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -695,6 +692,58 @@ withType(type)
 
 "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"
 
+## obj spec.http.service.spec.ports
+
+"The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies"
+
+### fn spec.http.service.spec.ports.withAppProtocol
+
+```ts
+withAppProtocol(appProtocol)
+```
+
+"The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default."
+
+### fn spec.http.service.spec.ports.withName
+
+```ts
+withName(name)
+```
+
+"The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service."
+
+### fn spec.http.service.spec.ports.withNodePort
+
+```ts
+withNodePort(nodePort)
+```
+
+"The port on each node on which this service is exposed when type is NodePort or LoadBalancer.  Usually assigned by the system. If a value is specified, in-range, and not in use it will be used, otherwise the operation will fail.  If not specified, a port will be allocated if this Service requires one.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type from NodePort to ClusterIP). More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport"
+
+### fn spec.http.service.spec.ports.withPort
+
+```ts
+withPort(port)
+```
+
+"The port that will be exposed by this service."
+
+### fn spec.http.service.spec.ports.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"The IP protocol for this port. Supports \"TCP\", \"UDP\", and \"SCTP\". Default is TCP."
+
+### fn spec.http.service.spec.ports.withTargetPort
+
+```ts
+withTargetPort(targetPort)
+```
+
+"Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service"
+
 ## obj spec.http.service.spec.sessionAffinityConfig
 
 "sessionAffinityConfig contains the configurations of session affinity."
@@ -756,3 +805,73 @@ withSubjectAltNamesMixin(subjectAltNames)
 "SubjectAlternativeNames is a list of SANs to include in the generated HTTP TLS certificate."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.http.tls.selfSignedCertificate.subjectAltNames
+
+"SubjectAlternativeNames is a list of SANs to include in the generated HTTP TLS certificate."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withDns
+
+```ts
+withDns(dns)
+```
+
+"DNS is the DNS name of the subject."
+
+### fn spec.http.tls.selfSignedCertificate.subjectAltNames.withIp
+
+```ts
+withIp(ip)
+```
+
+"IP is the IP address of the subject."
+
+## obj spec.secureSettings
+
+"SecureSettings is a list of references to Kubernetes secrets containing sensitive configuration options for Kibana."
+
+### fn spec.secureSettings.withEntries
+
+```ts
+withEntries(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.withEntriesMixin
+
+```ts
+withEntriesMixin(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.secureSettings.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
+
+## obj spec.secureSettings.entries
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.entries.withKey
+
+```ts
+withKey(key)
+```
+
+"Key is the key contained in the secret."
+
+### fn spec.secureSettings.entries.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the relative file path to map the key to. Path must not be an absolute file path and must not contain any \"..\" components."

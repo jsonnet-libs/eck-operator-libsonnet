@@ -22,8 +22,6 @@ permalink: /1.7/beat/v1beta1/beat/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -67,6 +65,13 @@ permalink: /1.7/beat/v1beta1/beat/
     * [`fn withName(name)`](#fn-speckibanarefwithname)
     * [`fn withNamespace(namespace)`](#fn-speckibanarefwithnamespace)
     * [`fn withServiceName(serviceName)`](#fn-speckibanarefwithservicename)
+  * [`obj spec.secureSettings`](#obj-specsecuresettings)
+    * [`fn withEntries(entries)`](#fn-specsecuresettingswithentries)
+    * [`fn withEntriesMixin(entries)`](#fn-specsecuresettingswithentriesmixin)
+    * [`fn withSecretName(secretName)`](#fn-specsecuresettingswithsecretname)
+    * [`obj spec.secureSettings.entries`](#obj-specsecuresettingsentries)
+      * [`fn withKey(key)`](#fn-specsecuresettingsentrieswithkey)
+      * [`fn withPath(path)`](#fn-specsecuresettingsentrieswithpath)
 
 ## Fields
 
@@ -181,24 +186,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -515,3 +502,53 @@ withServiceName(serviceName)
 ```
 
 "ServiceName is the name of an existing Kubernetes service which is used to make requests to the referenced object. It has to be in the same namespace as the referenced resource. If left empty, the default HTTP service of the referenced resource is used."
+
+## obj spec.secureSettings
+
+"SecureSettings is a list of references to Kubernetes Secrets containing sensitive configuration options for the Beat. Secrets data can be then referenced in the Beat config using the Secret's keys or as specified in `Entries` field of each SecureSetting."
+
+### fn spec.secureSettings.withEntries
+
+```ts
+withEntries(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.withEntriesMixin
+
+```ts
+withEntriesMixin(entries)
+```
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.secureSettings.withSecretName
+
+```ts
+withSecretName(secretName)
+```
+
+"SecretName is the name of the secret."
+
+## obj spec.secureSettings.entries
+
+"Entries define how to project each key-value pair in the secret to filesystem paths. If not defined, all keys will be projected to similarly named paths in the filesystem. If defined, only the specified keys will be projected to the corresponding paths."
+
+### fn spec.secureSettings.entries.withKey
+
+```ts
+withKey(key)
+```
+
+"Key is the key contained in the secret."
+
+### fn spec.secureSettings.entries.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the relative file path to map the key to. Path must not be an absolute file path and must not contain any \"..\" components."
